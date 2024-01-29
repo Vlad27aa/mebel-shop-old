@@ -19,43 +19,6 @@ import { useState, useEffect } from "react"
 
 import { IItem, IShop } from "./data/interfaces"
 import db from "./data/db"
-// import db from "./data/db"
-// console.log(db)
-
-// interface ICategory {
-//   category: string[]
-// }
-// interface ICurrencies {
-//   currency: string
-// }
-
-// interface IItem {
-//   brand: string
-//   categoryId: number
-//   currencyId: string
-//   description: string
-//   manufacturer_warranty: number
-//   name: string
-//   param: any[]
-//   picture: string[]
-//   price: number
-//   stock_quantity: number
-//   url: string
-//   vendor: string
-//   vendorCode: string
-//   listPrice?: number
-// }
-// interface IItems {
-//   item: IItem[]
-// }
-// interface IShop {
-//   categories: ICategory
-//   currencies: ICurrencies
-//   items: IItems
-//   name: string
-//   param: string
-//   url: string
-// }
 
 const categories: string[] = [
   "Столи обідні",
@@ -69,31 +32,11 @@ const categories: string[] = [
 
 function App() {
   const shop: IShop = db
-  // const [shop, setShop] = useState<IShop>(db)
-  // console.log(shop)
 
   const [filteredShop, setFilteredShop] = useState<IItem[] | undefined>(
     undefined
   )
-
-  // console.log(filteredShop)
-
-  // const [ides, setIdes] = useState<number[]>([])
-  // console.log(
-  //   ides.sort(function (a, b) {
-  //     return a - b
-  //   }).length
-  // )
-
-  // shop?.items.item &&
-  //   shop?.items.item.map(
-  //     (item) =>
-  //       !ides.includes(item.categoryId) &&
-  //       setIdes(!!shop?.items.item.length ? [...ides, item.categoryId] : [0])
-  //   )
-
   const [category, setCategory] = useState(categories[2])
-  // console.log(filteredShop)
 
   useEffect(() => {
     setFilteredShop(
@@ -108,23 +51,13 @@ function App() {
     )
   }, [category])
 
-  useEffect(() => {
-    // axios
-    // .get("https://exchangeapi-x56j.onrender.com/yml_catalog")
-    // .then(function (response) {
-    //   setShop(response.data.shop)
-    //   setCategory(response.data.shop?.items.item[0].param[0])
-    // })
-    // .catch(function (error) {
-    //   console.log(error)
-    // })
-    // .finally(() => console.log('Loaded'))
-  }, [])
-
   return (
     <div className="App">
       <Container>
+        {/* HEADER */}
         <Test />
+
+        {/* GREETINGS */}
         <Box
           sx={{
             display: "flex",
@@ -132,7 +65,10 @@ function App() {
             alignItems: "center",
           }}
         >
+          {/* GREETINGS_IMAGES */}
           <Images />
+
+          {/* GREETINGS_RIGHT_SECTION */}
           <Fade timeout={1200} in>
             <Box
               sx={{
@@ -177,6 +113,7 @@ function App() {
           </Fade>
         </Box>
 
+        {/* CATEGORIES_BUTTONS */}
         {shop && (
           <Fade timeout={1000} in>
             <Stack
@@ -205,25 +142,24 @@ function App() {
           </Fade>
         )}
 
+        {/* CARDS */}
         {shop && (
           <Fade timeout={1000} in>
             <Stack
               spacing={2}
-              mt={4}
-              mb={4}
               direction="row"
+              marginLeft="auto"
+              marginRight="auto"
               useFlexGap
               flexWrap="wrap"
-              sx={{ border: 1 }}
+              sx={{ maxWidth: "max-content" }}
             >
               {shop?.items.item &&
-                // CARDS
                 filteredShop?.map((el) => (
+                  // CARD
                   <Card
                     sx={{
                       maxWidth: 250,
-                      // marginLeft: "auto",
-                      // marginRight: "auto",
                       opacity: el.stock_quantity ? 1 : 0.3,
                     }}
                     key={el.name}
@@ -233,7 +169,6 @@ function App() {
                       <CardMedia
                         component="img"
                         height="250"
-                        // image={el.picture[0]}
                         image={
                           typeof el.picture === "string"
                             ? el.picture
@@ -243,41 +178,31 @@ function App() {
                         sx={{ objectFit: "contain" }}
                       />
                       <CardContent>
-                        <Typography
-                          gutterBottom
-                          variant="h5"
-                          component="div"
-                          // sx={{ height: 60 }}
-                        >
+                        {/* CARD_TITLE */}
+                        <Typography gutterBottom variant="h5" component="div">
                           {el.name}
                         </Typography>
+
+                        {/* CARD_CODE */}
                         <Typography
                           gutterBottom
                           variant="body2"
                           color="text.secondary"
-                          // sx={{ height: 60 }}
-                        >
-                          {`Категорія ${el.categoryId} - ${el.param[0]}`}
-                        </Typography>
-                        <Typography
-                          gutterBottom
-                          variant="body2"
-                          color="text.secondary"
-                          // sx={{ height: 60 }}
                         >
                           {`${el.vendorCode}`}
                         </Typography>
-                        {el.stock_quantity ? (
-                          <Typography gutterBottom variant="h6" component="div">
-                            В наявності: {el.stock_quantity} шт
-                          </Typography>
-                        ) : (
-                          <Typography gutterBottom variant="h6" component="div">
-                            Немає в наявності
-                          </Typography>
-                        )}
+
+                        {/* CARD_STOCK */}
+                        <Typography gutterBottom variant="h6" component="div">
+                          {el.stock_quantity
+                            ? `В наявності: ${el.stock_quantity} шт`
+                            : "Немає в наявності"}
+                        </Typography>
+
+                        {/* CARD_PRICES */}
                         {!!el.stock_quantity && (
                           <div>
+                            {/* CARD_PRICES_LIST */}
                             {el.listPrice && (
                               <Typography
                                 gutterBottom
@@ -289,6 +214,7 @@ function App() {
                               </Typography>
                             )}
 
+                            {/* CARD_PRICES_MAIN */}
                             <Typography
                               gutterBottom
                               variant="h5"
@@ -305,11 +231,6 @@ function App() {
                 ))}
             </Stack>
           </Fade>
-        )}
-        {!filteredShop?.length && (
-          <Typography variant="h5" component="div">
-            Немає!
-          </Typography>
         )}
       </Container>
     </div>
