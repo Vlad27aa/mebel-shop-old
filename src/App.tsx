@@ -5,12 +5,13 @@ import {
   CardActionArea,
   CardContent,
   CardMedia,
+  CardActions,
   Container,
   Fade,
   Stack,
   Typography,
 } from "@mui/material"
-import axios from "axios"
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined"
 import "./App.css"
 import Test from "./components/Test"
 import Images from "./components/Images"
@@ -19,6 +20,7 @@ import { useState, useEffect } from "react"
 
 import { IItem, IShop } from "./data/interfaces"
 import db from "./data/db"
+import Header from "./components/Header/Header"
 
 const categories: string[] = [
   "Столи обідні",
@@ -55,21 +57,21 @@ function App() {
     <div className="App">
       <Container>
         {/* HEADER */}
-        <Test />
+        {/* <Test /> */}
 
         {/* GREETINGS */}
-        <Box
+        {/* <Box
           sx={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
           }}
-        >
-          {/* GREETINGS_IMAGES */}
-          <Images />
+        > */}
+        {/* GREETINGS_IMAGES */}
+        {/* <Images /> */}
 
-          {/* GREETINGS_RIGHT_SECTION */}
-          <Fade timeout={1200} in>
+        {/* GREETINGS_RIGHT_SECTION */}
+        {/* <Fade timeout={1200} in>
             <Box
               sx={{
                 maxWidth: 500,
@@ -111,7 +113,7 @@ function App() {
               </Button>
             </Box>
           </Fade>
-        </Box>
+        </Box> */}
 
         {/* CATEGORIES_BUTTONS */}
         {shop && (
@@ -159,7 +161,7 @@ function App() {
                   // CARD
                   <Card
                     sx={{
-                      maxWidth: 250,
+                      width: 300,
                       opacity: el.stock_quantity ? 1 : 0.3,
                     }}
                     key={el.name}
@@ -168,7 +170,7 @@ function App() {
                     <CardActionArea>
                       <CardMedia
                         component="img"
-                        height="250"
+                        height="200"
                         image={
                           typeof el.picture === "string"
                             ? el.picture
@@ -177,23 +179,38 @@ function App() {
                         alt={el.name}
                         sx={{ objectFit: "contain" }}
                       />
-                      <CardContent>
+                      <CardContent sx={{ paddingY: 0 }}>
                         {/* CARD_TITLE */}
-                        <Typography gutterBottom variant="h5" component="div">
+                        <Typography
+                          gutterBottom
+                          variant="h6"
+                          component="div"
+                          sx={{ textAlign: "center", height: 96, marginTop: 1 }}
+                        >
                           {el.name}
                         </Typography>
 
                         {/* CARD_CODE */}
-                        <Typography
+                        {/* <Typography
                           gutterBottom
                           variant="body2"
                           color="text.secondary"
                         >
                           {`${el.vendorCode}`}
-                        </Typography>
+                        </Typography> */}
 
                         {/* CARD_STOCK */}
-                        <Typography gutterBottom variant="h6" component="div">
+                        <Typography
+                          // gutterBottom
+                          variant="body2"
+                          component="div"
+                          sx={{
+                            textAlign: !!el.stock_quantity
+                              ? "inherit"
+                              : "center",
+                            marginBottom: !!el.stock_quantity ? 0.5 : 4,
+                          }}
+                        >
                           {el.stock_quantity
                             ? `В наявності: ${el.stock_quantity} шт`
                             : "Немає в наявності"}
@@ -201,32 +218,61 @@ function App() {
 
                         {/* CARD_PRICES */}
                         {!!el.stock_quantity && (
-                          <div>
+                          <Box
+                            sx={{
+                              display: "flex",
+                            }}
+                          >
                             {/* CARD_PRICES_LIST */}
                             {el.listPrice && (
                               <Typography
                                 gutterBottom
-                                variant="h6"
+                                variant="subtitle1"
                                 component="div"
-                                sx={{ textDecoration: "line-through" }}
+                                color="text.secondary"
+                                sx={{
+                                  textDecoration: "line-through",
+                                  textDecorationColor: "rgba(0, 0, 0, 0.6)",
+                                  marginRight: 1,
+                                }}
                               >
-                                {el.listPrice} грн
+                                {el.listPrice.toFixed()}
                               </Typography>
                             )}
 
                             {/* CARD_PRICES_MAIN */}
                             <Typography
-                              gutterBottom
                               variant="h5"
                               component="div"
-                              sx={{ color: el.listPrice ? "red" : "" }}
+                              sx={{
+                                color: el.listPrice ? "red" : "",
+                                fontWeight: 500,
+                              }}
                             >
-                              {el.price} грн
+                              {el.price.toFixed()} грн
                             </Typography>
-                          </div>
+                          </Box>
                         )}
                       </CardContent>
                     </CardActionArea>
+                    {!!el.stock_quantity && (
+                      <CardActions sx={{ paddingX: 2, paddingBottom: 2 }}>
+                        <Button
+                          variant="contained"
+                          sx={{
+                            backgroundColor: colors.dark,
+                            ":hover": { backgroundColor: colors.dark },
+                          }}
+                          onClick={() => console.log("clicked")}
+                        >
+                          <ShoppingCartOutlinedIcon
+                            fontSize="small"
+                            sx={{ marginRight: 1 }}
+                          />
+                          Купити
+                        </Button>
+                      </CardActions>
+                    )}
                   </Card>
                 ))}
             </Stack>
