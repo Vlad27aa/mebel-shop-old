@@ -86,7 +86,7 @@ function HideOnScroll(props: Props) {
 }
 
 const drawerWidth = 240
-const navItems = ["Home", "About", "Contact"]
+const navItems = ["Головна", "Каталог", "Про нас", "Контакти"]
 
 export default function Header(props: Props) {
   const { window } = props
@@ -99,7 +99,7 @@ export default function Header(props: Props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
+        M-Shop
       </Typography>
       <Divider />
       <List>
