@@ -195,7 +195,7 @@ export default function Header(props: Props) {
       </nav>
       <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
-        <Typography>
+        {/* <Typography>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique
           unde fugit veniam eius, perspiciatis sunt? Corporis qui ducimus
           quibusdam, aliquam dolore excepturi quae. Distinctio enim at eligendi
@@ -231,7 +231,7 @@ export default function Header(props: Props) {
           rem repellendus. Voluptates perspiciatis, in pariatur impedit, nam
           facilis libero dolorem dolores sunt inventore perferendis, aut
           sapiente modi nesciunt.
-        </Typography>
+        </Typography> */}
       </Box>
     </Box>
   )

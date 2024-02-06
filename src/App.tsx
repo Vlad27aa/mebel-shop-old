@@ -58,6 +58,7 @@ function App() {
       <Container>
         {/* HEADER */}
         {/* <Test /> */}
+        <Header>{<p>I am a children</p>}</Header>
 
         {/* GREETINGS */}
         {/* <Box
