@@ -13,8 +13,6 @@ import {
 } from "@mui/material"
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined"
 import "./App.css"
-import Test from "./components/Test"
-import Images from "./components/Images"
 import colors from "./data/colors"
 import { useState, useEffect } from "react"
 
@@ -23,7 +21,7 @@ import db from "./data/db"
 import Header from "./components/Header/Header"
 
 const categories: string[] = [
-  "Столи обідні",
+  "Столи обідн",
   "Журнальні столи",
   "Стільці",
   "Крісла",
@@ -57,64 +55,7 @@ function App() {
     <div className="App">
       <Container>
         {/* HEADER */}
-        {/* <Test /> */}
         <Header>{<p>I am a children</p>}</Header>
-
-        {/* GREETINGS */}
-        {/* <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        > */}
-        {/* GREETINGS_IMAGES */}
-        {/* <Images /> */}
-
-        {/* GREETINGS_RIGHT_SECTION */}
-        {/* <Fade timeout={1200} in>
-            <Box
-              sx={{
-                maxWidth: 500,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <Typography
-                component="h1"
-                sx={{
-                  fontFamily: "Bad Script",
-                  fontWeight: 600,
-                  lineHeight: 1.3,
-                  letterSpacing: 8,
-                  color: colors.dark,
-                  textAlign: "center",
-                  fontSize: { xs: 60 },
-                }}
-              >
-                Магазин меблів з безкоштовною доставкою по Україні
-              </Typography>
-              <Button
-                variant="outlined"
-                size="large"
-                sx={{
-                  // letterSpacing: 1,
-                  color: colors.brown,
-                  borderColor: colors.brown,
-                  marginTop: 4,
-                  "&:hover": {
-                    backgroundColor: colors.light,
-                    border: 1,
-                    borderColor: colors.brown,
-                  },
-                }}
-              >
-                Перейти до каталогу
-              </Button>
-            </Box>
-          </Fade>
-        </Box> */}
 
         {/* CATEGORIES_BUTTONS */}
         {shop && (
@@ -191,18 +132,8 @@ function App() {
                           {el.name}
                         </Typography>
 
-                        {/* CARD_CODE */}
-                        {/* <Typography
-                          gutterBottom
-                          variant="body2"
-                          color="text.secondary"
-                        >
-                          {`${el.vendorCode}`}
-                        </Typography> */}
-
                         {/* CARD_STOCK */}
                         <Typography
-                          // gutterBottom
                           variant="body2"
                           component="div"
                           sx={{
