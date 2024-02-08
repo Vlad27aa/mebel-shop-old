@@ -19,19 +19,12 @@ import { useState, useEffect } from "react"
 import { IItem, IShop } from "./data/interfaces"
 import db from "./data/db"
 import Header from "./components/Header/Header"
-
-const categories: string[] = [
-  "Столи обідн",
-  "Журнальні столи",
-  "Стільці",
-  "Крісла",
-  "Дивани",
-  "Акції",
-  "Для вітальні",
-]
+import { useAppSelector } from "./hooks"
 
 function App() {
   const shop: IShop = db
+  const navItems = useAppSelector((state) => state.shop.navItems)
+  const categories = useAppSelector((state) => state.shop.categories)
 
   const [filteredShop, setFilteredShop] = useState<IItem[] | undefined>(
     undefined
@@ -62,8 +55,7 @@ function App() {
           <Fade timeout={1000} in>
             <Stack
               spacing={{ xs: 1, sm: 2 }}
-              mt={4}
-              mb={4}
+              mb={6}
               direction="row"
               useFlexGap
               flexWrap="wrap"
