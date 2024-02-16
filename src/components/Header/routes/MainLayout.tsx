@@ -4,7 +4,7 @@ import Header from "../Header"
 const MainLayout = () => {
   return (
     <>
-      {/* <Header /> */}
+      <Header>{<p>I am a children</p>}</Header>
       <Outlet />
     </>
   )

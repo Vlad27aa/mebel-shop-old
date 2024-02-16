@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
+import db from "../../data/db"
 
 export const shopSlice = createSlice({
   name: "shop",
@@ -12,6 +13,7 @@ export const shopSlice = createSlice({
       "Акції",
       "Для вітальні",
     ],
+    shop: db,
   },
 
   reducers: {

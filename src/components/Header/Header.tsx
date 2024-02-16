@@ -20,6 +20,7 @@ import InputBase from "@mui/material/InputBase"
 import SearchIcon from "@mui/icons-material/Search"
 import Badge from "@mui/material/Badge"
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
+import { Link } from "react-router-dom"
 
 interface Props {
   window?: () => Window
@@ -77,7 +78,13 @@ function HideOnScroll(props: Props) {
 }
 
 const drawerWidth = 240
-const navItems = ["Головна", "Каталог", "Про нас", "Контакти"]
+// const navItems = ["Головна", "Каталог", "Про нас", "Контакти"]
+const navItems = [
+  { name: "Головна", slug: "/" },
+  { name: "Каталог", slug: "/contacts" },
+  { name: "Про нас", slug: "/about" },
+  { name: "Контакти", slug: "/contacts" },
+]
 
 export default function Header(props: Props) {
   const { window } = props
@@ -91,14 +98,16 @@ export default function Header(props: Props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        M-Shop
+        <Link to="/">M-Shop</Link>
       </Typography>
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+          <ListItem key={item.name} disablePadding>
             <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
+              <Link to={item.slug}>
+                <ListItemText primary={item.name} />
+              </Link>
             </ListItemButton>
           </ListItem>
         ))}
@@ -127,13 +136,15 @@ export default function Header(props: Props) {
             >
               <MenuIcon />
             </IconButton>
-
             <Typography
               variant="h6"
               component="div"
-              sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", sm: "block", textAlign: "left" },
+              }}
             >
-              M-Shop
+              <Link to="/">M-Shop</Link>
             </Typography>
             <Search sx={{ border: 1, borderColor: "#2f221b" }}>
               <SearchIconWrapper>
@@ -148,12 +159,14 @@ export default function Header(props: Props) {
             </Search>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
               {navItems.map((item) => (
-                <Button key={item} sx={{ color: "#2f221b" }}>
-                  {item}
+                <Button key={item.name} sx={{ color: "#2f221b" }}>
+                  <Link to={item.slug}>{item.name}</Link>
                 </Button>
               ))}
             </Box>
-            <Box sx={{ display: {} }}>
+
+            {/* BASKET ICON */}
+            <Link to="/basket" className="mt-2 md:mt-0">
               <IconButton
                 size="large"
                 aria-label="show 4 new mails"
@@ -163,7 +176,7 @@ export default function Header(props: Props) {
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
-            </Box>
+            </Link>
           </Toolbar>
         </AppBar>
       </HideOnScroll>
