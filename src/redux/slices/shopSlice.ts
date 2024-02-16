@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit"
 export const shopSlice = createSlice({
   name: "shop",
   initialState: {
-    navItems: ["Головна", "Каталог", "Про нас", "Контакти"],
     categories: [
       "Столи обідні",
       "Журнальні столи",

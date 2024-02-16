@@ -19,11 +19,12 @@ import { useState, useEffect } from "react"
 import { IItem, IShop } from "./data/interfaces"
 import db from "./data/db"
 import Header from "./components/Header/Header"
-import { useAppSelector } from "./hooks"
+import { useAppSelector, useAppDispatch } from "./hooks"
 
 function App() {
+  const dispatch = useAppDispatch()
+
   const shop: IShop = db
-  const navItems = useAppSelector((state) => state.shop.navItems)
   const categories = useAppSelector((state) => state.shop.categories)
 
   const [filteredShop, setFilteredShop] = useState<IItem[] | undefined>(
