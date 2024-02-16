@@ -15,6 +15,7 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined"
 import "./App.css"
 import colors from "./data/colors"
 import { useState, useEffect } from "react"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 import { IItem, IShop } from "./data/interfaces"
 import db from "./data/db"
