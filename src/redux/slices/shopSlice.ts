@@ -14,9 +14,13 @@ export const shopSlice = createSlice({
       "Для вітальні",
     ],
     shop: db,
+    basket: [{}],
   },
 
   reducers: {
+    addToBasket: (state, action) => {
+      state.basket.push(action.payload)
+    },
     // changeMainCategory: (state: any, action: any) => {
     //   state.mainCategory = action.payload
     // },
@@ -26,6 +30,6 @@ export const shopSlice = createSlice({
   },
 })
 
-export const {} = shopSlice.actions
+export const { addToBasket } = shopSlice.actions
 
 export default shopSlice.reducer

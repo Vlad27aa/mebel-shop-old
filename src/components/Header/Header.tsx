@@ -21,6 +21,7 @@ import SearchIcon from "@mui/icons-material/Search"
 import Badge from "@mui/material/Badge"
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
 import { Link } from "react-router-dom"
+import { useAppSelector } from "../../hooks"
 
 interface Props {
   window?: () => Window
@@ -78,10 +79,9 @@ function HideOnScroll(props: Props) {
 }
 
 const drawerWidth = 240
-// const navItems = ["Головна", "Каталог", "Про нас", "Контакти"]
 const navItems = [
   { name: "Головна", slug: "/" },
-  { name: "Каталог", slug: "/contacts" },
+  { name: "Каталог", slug: "/catalog" },
   { name: "Про нас", slug: "/about" },
   { name: "Контакти", slug: "/contacts" },
 ]
@@ -90,6 +90,8 @@ export default function Header(props: Props) {
   const { window } = props
   const [mobileOpen, setMobileOpen] = React.useState(false)
   const [searchText, setSearchText] = React.useState("")
+
+  const basketQuantity = useAppSelector((state) => state.shop.basket.length - 1)
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState)
@@ -151,7 +153,7 @@ export default function Header(props: Props) {
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
-                placeholder="Search…"
+                placeholder="Пошук…"
                 inputProps={{ "aria-label": "search" }}
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
@@ -159,9 +161,9 @@ export default function Header(props: Props) {
             </Search>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
               {navItems.map((item) => (
-                <Button key={item.name} sx={{ color: "#2f221b" }}>
-                  <Link to={item.slug}>{item.name}</Link>
-                </Button>
+                <Link to={item.slug} key={item.name}>
+                  <Button sx={{ color: "#2f221b" }}>{item.name}</Button>
+                </Link>
               ))}
             </Box>
 
@@ -172,7 +174,7 @@ export default function Header(props: Props) {
                 aria-label="show 4 new mails"
                 color="inherit"
               >
-                <Badge badgeContent={2} color="error">
+                <Badge badgeContent={basketQuantity} color="error">
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
